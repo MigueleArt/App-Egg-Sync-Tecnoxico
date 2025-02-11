@@ -1,0 +1,6 @@
+1. Librerias para navegar entre interfaces
+
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons @react-navigation/stack
+
+npm install @react-navigation/native
