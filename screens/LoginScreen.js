@@ -8,11 +8,11 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>EggSync</Text>
-      <Image source={require('../images/pollo-chico.jpg')} style={styles.logo} />
-      <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Home')}>
+      <Image source={require('../images/polloLogo.jpg')} style={styles.logo} />
+      <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('SesionStart')}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonSecondary}>
+      <TouchableOpacity style={styles.buttonSecondary} onPress={() => navigation.navigate('Registro')}>
         <Text style={styles.buttonSecondaryText}>Registrarse</Text>
       </TouchableOpacity>
     </View>
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: 28,
+    fontSize: 37,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: '#0D1B2A',
+    color: '#24589e',
   },
   logo: {
     width: 200,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   buttonPrimary: {
-    backgroundColor: '#0D1B2A',
+    backgroundColor: '#24589e',
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,

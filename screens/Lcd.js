@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function Incubadora() {
+export default function IncubatorScreen() {
   const navigation = useNavigation();
 
   return (
@@ -12,37 +12,37 @@ export default function Incubadora() {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#24589e" />
         </TouchableOpacity>
-        <Text style={styles.title}>Estado Incubadora</Text>
+        <Text style={styles.title}>Configuración LCD</Text>
       </View>
 
-      <Image source={require('../images/polloLogo.jpg')} style={styles.logo} />
+      <Image source={require('../images/lcd.jpg')} style={styles.logo} />
 
       <View style={styles.section}>
-      <View style={styles.circle}>
+        <View style={styles.circle}>
         <Ionicons name="thermometer-outline" size={40} color="#24589e" style={styles.icon} />
         </View>
         <View style={styles.separator}>
-          <Text style={styles.label}>Temperatura:</Text>
+          <Text style={styles.label}>Mostrar Temperatura:</Text>
           <Text style={styles.value}>37.10°C</Text>
         </View>
       </View>
 
-      <View style={styles.section}><View style={styles.circle}>
+      <View style={styles.section}>
+      <View style={styles.circle}>
         <Ionicons name="water-outline" size={40} color="#24589e" style={styles.icon} />
         </View>
         <View style={styles.separator}>
-          <Text style={styles.label}>Humedad:</Text>
+          <Text style={styles.label}>Mostrar Humedad:</Text>
           <Text style={styles.value}>54.30%</Text>
         </View>
       </View>
 
       <View style={styles.section}>
       <View style={styles.circle}>
-        <Ionicons name="time-outline" size={40} color="#24589e" style={styles.icon} />
+        <Ionicons name="calendar-outline" size={40} color="#24589e" style={styles.icon} />
         </View>
-
         <View style={styles.separator}>
-          <Text style={styles.label}>Control de días:</Text>
+          <Text style={styles.label}>Mostrar Control de días:</Text>
           <Text style={styles.value}>17 Días</Text>
         </View>
       </View>
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    alignItems: 'center',
     paddingTop: 50,
   },
   header: {
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     height: 300,
     resizeMode: 'contain',
     marginBottom: 20,
+    alignSelf: 'center',
   },
   section: {
     marginBottom: 20,
@@ -87,19 +87,21 @@ const styles = StyleSheet.create({
     width: '85%',
     flexDirection: 'row',
     alignItems: 'center',
+    alignSelf: 'center',
   },
   separator: {
-    marginLeft: 10,
+    marginLeft: 15,
   },
   label: {
     fontSize: 18,
+    fontWeight: '600',
     color: '#24589e',
   },
   value: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#24589e',
-  },
+    color: '#333',
+  },  
   circle: {
     width: 50,
     height: 50,

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingTop: 50,
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
+    color: '#24589e'
   },
   scrollContainer: {
     flex: 1,
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     right: 30,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#F0D637',
     borderRadius: 50,
     width: 60,
     height: 60,
@@ -120,6 +121,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#007bff',
     marginTop: 10,
+  },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  cardTouchable: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optionsButton: {
+    padding: 10,
+  },
+  circle: {
+    width: 50,
+    height: 50,
+    borderRadius: 25, 
+    backgroundColor: '#F0D637',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden', 
   },
 });
 
