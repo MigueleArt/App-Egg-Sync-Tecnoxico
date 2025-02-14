@@ -4,19 +4,25 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 
+// Definimos el tipo para Incubadora
+type Incubadora = {
+  id: number;
+  name: string;
+};
+
 export default function HomeScreen() {
-  const [incubadoras, setIncubadoras] = useState([{ id: 1, name: 'Incubadora 1' }]);
-  const [selectedIncubadora, setSelectedIncubadora] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [newName, setNewName] = useState('');
-  const navigation = useNavigation();
+  const [incubadoras, setIncubadoras] = useState<Incubadora[]>([{ id: 1, name: 'Incubadora 1' }]);
+  const [selectedIncubadora, setSelectedIncubadora] = useState<Incubadora | null>(null);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [newName, setNewName] = useState<string>('');
+  const navigation = useNavigation<any>(); // Ajusta 'any' según tus tipos de navegación
 
   const agregarIncubadora = () => {
     const newId = incubadoras.length + 1;
     setIncubadoras([...incubadoras, { id: newId, name: `Incubadora ${newId}` }]);
   };
 
-  const openModal = (incubadora) => {
+  const openModal = (incubadora: Incubadora) => {
     setSelectedIncubadora(incubadora);
     setNewName(incubadora.name);
     setModalVisible(true);
@@ -24,13 +30,13 @@ export default function HomeScreen() {
 
   const cambiarNombre = () => {
     setIncubadoras(incubadoras.map(item => 
-      item.id === selectedIncubadora.id ? { ...item, name: newName } : item
+      item.id === selectedIncubadora?.id ? { ...item, name: newName } : item
     ));
     setModalVisible(false);
   };
 
   const eliminarIncubadora = () => {
-    setIncubadoras(incubadoras.filter(item => item.id !== selectedIncubadora.id));
+    setIncubadoras(incubadoras.filter(item => item.id !== selectedIncubadora?.id));
     setModalVisible(false);
   };
 

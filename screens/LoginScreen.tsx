@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/navigation';
+
+type NavigationProps = StackNavigationProp<RootStackParamList, 'Login'>;
 
 export default function LoginScreen() {
-  const navigation = useNavigation();
-  
+  const navigation = useNavigation<NavigationProps>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>EggSync</Text>
-      <Image source={require('../images/polloLogo.jpg')} style={styles.logo} />
+      <Image source={require('../images/pollo-yellow.png')} style={styles.logo} />
       <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('SesionStart')}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
@@ -27,15 +31,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: 37,
+    fontSize: 45,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
     color: '#24589e',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 240,
+    height: 240,
     resizeMode: 'contain',
     marginBottom: 40,
   },

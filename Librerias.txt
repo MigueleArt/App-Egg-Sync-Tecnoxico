@@ -4,3 +4,13 @@ npm install @react-navigation/native
 npm install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons @react-navigation/stack
 
 npm install @react-navigation/native
+
+npm install firebase
+
+npm install typescript @types/react @types/react-native
+
+npm install axios
+
+npm i mongose 
+ 
+npm i nodemon gay

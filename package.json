@@ -1,7 +1,7 @@
 {
   "name": "my-project",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,18 +12,30 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+    "@types/react": "^18.3.18",
+    "@types/react-native": "^0.73.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
     "expo": "~52.0.32",
     "expo-status-bar": "~2.0.1",
+    "express": "^4.21.2",
+    "firebase": "^11.3.1",
+    "mongoose": "^8.10.0",
     "react": "18.3.1",
     "react-native": "0.76.7",
     "react-native-gesture-handler": "^2.23.1",
     "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "^5.2.0",
     "react-native-screens": "^4.6.0",
-    "react-native-vector-icons": "^10.2.0"
+    "react-native-vector-icons": "^10.2.0",
+    "typescript": "^5.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "description": "��#\u0000 \u0000A\u0000p\u0000p\u0000-\u0000E\u0000g\u0000g\u0000-\u0000S\u0000y\u0000n\u0000c\u0000\r\u0000 \u0000",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

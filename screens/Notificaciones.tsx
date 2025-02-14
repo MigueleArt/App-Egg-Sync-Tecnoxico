@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function IncubatorScreen() {
+export default function Notificaciones() {
   const navigation = useNavigation();
 
   return (
@@ -12,38 +12,36 @@ export default function IncubatorScreen() {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="#24589e" />
         </TouchableOpacity>
-        <Text style={styles.title}>Configuración LCD</Text>
+        <Text style={styles.title}>Notificaciones</Text>
       </View>
-
-      <Image source={require('../images/lcd.jpg')} style={styles.logo} />
 
       <View style={styles.section}>
         <View style={styles.circle}>
-        <Ionicons name="thermometer-outline" size={40} color="#24589e" style={styles.icon} />
+        <Ionicons name="notifications-outline" size={40} color="#24589e"  />
         </View>
         <View style={styles.separator}>
-          <Text style={styles.label}>Mostrar Temperatura:</Text>
-          <Text style={styles.value}>37.10°C</Text>
+          <Text style={styles.label}>EggSync</Text>
+          <Text style={styles.value}>La temperatura de la incubadora está en niveles óptimos.</Text>
         </View>
       </View>
 
       <View style={styles.section}>
       <View style={styles.circle}>
-        <Ionicons name="water-outline" size={40} color="#24589e" style={styles.icon} />
+        <Ionicons name="notifications-outline" size={40} color="#24589e"  />
         </View>
         <View style={styles.separator}>
-          <Text style={styles.label}>Mostrar Humedad:</Text>
-          <Text style={styles.value}>54.30%</Text>
+          <Text style={styles.label}>EggSync</Text>
+          <Text style={styles.value}>Revisa la humedad: podría ser necesario ajustarla.</Text>
         </View>
       </View>
 
       <View style={styles.section}>
       <View style={styles.circle}>
-        <Ionicons name="calendar-outline" size={40} color="#24589e" style={styles.icon} />
+        <Ionicons name="notifications-outline" size={40} color="#24589e" />
         </View>
         <View style={styles.separator}>
-          <Text style={styles.label}>Mostrar Control de días:</Text>
-          <Text style={styles.value}>17 Días</Text>
+          <Text style={styles.label}>EggSync</Text>
+          <Text style={styles.value}>Faltan 3 días para completar el ciclo de incubación.</Text>
         </View>
       </View>
     </View>
@@ -72,25 +70,19 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
   },
-  logo: {
-    width: 300,
-    height: 300,
-    resizeMode: 'contain',
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
   section: {
     marginBottom: 20,
     backgroundColor: '#f8f9fa',
     padding: 15,
     borderRadius: 10,
-    width: '85%',
+    width: '90%',
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
   },
   separator: {
-    marginLeft: 15,
+    marginLeft: 10,
+    flex: 1,
   },
   label: {
     fontSize: 18,
@@ -98,15 +90,15 @@ const styles = StyleSheet.create({
     color: '#24589e',
   },
   value: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 15,
     color: '#333',
-  },  
+  },
+  
   circle: {
     width: 50,
     height: 50,
-    borderRadius: 75, 
-    backgroundColor: '#F0D637', 
+    borderRadius: 25, 
+    backgroundColor: '#F0D637',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden', 
