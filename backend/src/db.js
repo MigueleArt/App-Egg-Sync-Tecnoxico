@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
 
-export connectDb = async () =>{
+
+export const connectDB = async () =>{
     try { 
-await mongoose.connect('mongod://localhost/eggsync');
-        console.log(">>>>> DB is connect")
+await mongoose.connect('mongodb://localhost:27017/eggsync');
+        console.log(">>>>> Base de datos conectada <<<<<")
     } catch (error){
         console.log(error);
     }
