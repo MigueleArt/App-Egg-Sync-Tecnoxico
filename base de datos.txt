@@ -1,8 +1,8 @@
 use eggsync
-db.usuario.insertOne({
-  "nombre": "Juan Pérez",
-  "email": "juan.perez@example.com",
-  "password": "hashed_password",
-  "rol": "usuario",
+db.usuarios.insertOne({
+  "_id": ObjectId("..."), 
+  "email": "usuario@example.com",
+  "password": "contraseña",
   "fecha_creacion": "2025-02-14T12:00:00.000Z"
 });
+

@@ -1,25 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 import styles from '../styles';
 
-// Definimos el tipo para Incubadora
 type Incubadora = {
-  id: number;
+  _id: string;
   name: string;
 };
 
 export default function HomeScreen() {
-  const [incubadoras, setIncubadoras] = useState<Incubadora[]>([{ id: 1, name: 'Incubadora 1' }]);
+  const [incubadoras, setIncubadoras] = useState<Incubadora[]>([]);
   const [selectedIncubadora, setSelectedIncubadora] = useState<Incubadora | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [newName, setNewName] = useState<string>('');
-  const navigation = useNavigation<any>(); // Ajusta 'any' según tus tipos de navegación
+  const navigation = useNavigation<any>();
 
-  const agregarIncubadora = () => {
-    const newId = incubadoras.length + 1;
-    setIncubadoras([...incubadoras, { id: newId, name: `Incubadora ${newId}` }]);
+  useEffect(() => {
+    const fetchIncubadoras = async () => {
+      try {
+        const response = await axios.get('http://192.168.1.98:3000/api/incubadoras');
+        setIncubadoras(response.data);
+      } catch (error) {
+        console.error('Error al obtener las incubadoras:', error);
+      }
+    };
+
+    fetchIncubadoras();
+  }, []);
+
+  const agregarIncubadora = async () => {
+    try {
+      const response = await axios.post('http://192.168.1.98:3000/api/incubadoras', {
+        name: `Incubadora ${incubadoras.length + 1}`,
+      });
+      setIncubadoras([...incubadoras, response.data]);
+    } catch (error) {
+      console.error('Error al agregar la incubadora:', error);
+    }
   };
 
   const openModal = (incubadora: Incubadora) => {
@@ -28,16 +47,32 @@ export default function HomeScreen() {
     setModalVisible(true);
   };
 
-  const cambiarNombre = () => {
-    setIncubadoras(incubadoras.map(item => 
-      item.id === selectedIncubadora?.id ? { ...item, name: newName } : item
-    ));
-    setModalVisible(false);
+  const cambiarNombre = async () => {
+    if (!selectedIncubadora) return;
+
+    try {
+      const response = await axios.put(`http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora._id}`, {
+        name: newName,
+      });
+      setIncubadoras(incubadoras.map(item => 
+        item._id === selectedIncubadora._id ? response.data : item
+      ));
+      setModalVisible(false);
+    } catch (error) {
+      console.error('Error al actualizar la incubadora:', error);
+    }
   };
 
-  const eliminarIncubadora = () => {
-    setIncubadoras(incubadoras.filter(item => item.id !== selectedIncubadora?.id));
-    setModalVisible(false);
+  const eliminarIncubadora = async () => {
+    if (!selectedIncubadora) return;
+
+    try {
+      await axios.delete(`http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora._id}`);
+      setIncubadoras(incubadoras.filter(item => item._id !== selectedIncubadora._id));
+      setModalVisible(false);
+    } catch (error) {
+      console.error('Error al eliminar la incubadora:', error);
+    }
   };
 
   return (
@@ -49,8 +84,8 @@ export default function HomeScreen() {
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContent}>
         <View style={styles.cardList}>
           {incubadoras.map((item) => (
-            <View key={item.id} style={styles.card}>
-              <TouchableOpacity style={styles.cardTouchable} onPress={() => navigation.navigate('Incubator', { id: item.id })}>
+            <View key={item._id} style={styles.card}>
+              <TouchableOpacity style={styles.cardTouchable} onPress={() => navigation.navigate('Incubator', { id: item._id })}>
                 <Image source={require('../images/pollo-chico.jpg')} style={styles.icon} />
                 <Text style={styles.cardText}>{item.name}</Text>
               </TouchableOpacity>

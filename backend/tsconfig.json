@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",  // Usa ESNext para soportar las últimas características de JavaScript
+    "module": "NodeNext",  // Usa módulos NodeNext para compatibilidad con Node.js
+    "moduleResolution": "NodeNext",  // Resuelve módulos como lo hace Node.js
+    "esModuleInterop": true,  // Permite la interoperabilidad entre módulos ES y CommonJS
+    "strict": true,  // Habilita todas las opciones de tipo estricto
+    "skipLibCheck": true,  // Omite la verificación de tipos en archivos .d.ts
+    "forceConsistentCasingInFileNames": true,  // Fuerza el uso consistente de mayúsculas/minúsculas en nombres de archivos
+    "outDir": "./dist",  // Carpeta de salida para los archivos compilados
+    "rootDir": "./src",  // Carpeta raíz del código fuente
+    "allowImportingTsExtensions": true,  // Habilita la importación de extensiones .ts
+    "noEmit": true  // Habilita la opción noEmit para que no se emita ningún archivo de salida
+  },
+  "include": ["src/**/*.ts"],  // Incluye todos los archivos TypeScript en la carpeta src
+  "exclude": ["node_modules"]  // Excluye la carpeta node_modules
+}

@@ -16,9 +16,6 @@ export default function LoginScreen() {
       <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('SesionStart')}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonSecondary} onPress={() => navigation.navigate('Registro')}>
-        <Text style={styles.buttonSecondaryText}>Registrarse</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -54,20 +51,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  buttonSecondary: {
-    borderWidth: 1,
-    borderColor: '#0D1B2A',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
-    width: '80%',
-    alignItems: 'center',
-  },
-  buttonSecondaryText: {
-    color: '#0D1B2A',
     fontSize: 16,
     fontWeight: 'bold',
   },

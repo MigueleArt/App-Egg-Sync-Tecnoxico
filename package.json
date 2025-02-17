@@ -20,6 +20,7 @@
     "expo-status-bar": "~2.0.1",
     "express": "^4.21.2",
     "firebase": "^11.3.1",
+    "firebase-admin": "^13.1.0",
     "mongoose": "^8.10.0",
     "react": "18.3.1",
     "react-native": "0.76.7",
@@ -31,7 +32,9 @@
     "typescript": "^5.7.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
   },
   "private": true,
   "description": "��#\u0000 \u0000A\u0000p\u0000p\u0000-\u0000E\u0000g\u0000g\u0000-\u0000S\u0000y\u0000n\u0000c\u0000\r\u0000 \u0000",

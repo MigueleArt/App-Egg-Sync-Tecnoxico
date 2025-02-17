@@ -1,13 +1,33 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
+import axios from 'axios';
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function SesionStart() {
   const navigation = useNavigation<NavigationProps>();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://192.168.1.98:3000/api/auth/login', { email, password });
+      if (response.data.message === 'Inicio de sesión exitoso') {
+        // Guardar el token de autenticación (si estás usando JWT)
+        // Por ejemplo: AsyncStorage.setItem('token', response.data.token);
+
+        // Redirigir a la pantalla principal
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Error', 'Credenciales incorrectas');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Hubo un problema al iniciar sesión');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -15,10 +35,21 @@ export default function SesionStart() {
       <Text style={styles.title2}>¡Bienvenido de nuevo!</Text>
       <Text style={styles.title3}>¡Me alegra verte de nuevo!</Text>
 
-      <TextInput placeholder="Introduce tu correo electrónico" style={styles.input} />
-      <TextInput placeholder="Introduce tu contraseña" style={styles.input} secureTextEntry />
+      <TextInput
+        placeholder="Introduce tu correo electrónico"
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        placeholder="Introduce tu contraseña"
+        style={styles.input}
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
 
-      <TouchableOpacity style={styles.buttonPrimary} onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.buttonPrimary} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
 
