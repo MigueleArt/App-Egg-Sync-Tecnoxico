@@ -52,16 +52,7 @@ export default function IncubatorScreen() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('AjustesAvanzados')}>
-        <View style={styles.section}>
-          <View style={styles.circle}>
-            <Ionicons name="cog" size={40} color="#24589e" />
-          </View>
-          <View style={styles.separator}>
-            <Text style={styles.optionText}>Ajustes Avanzados</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+      
     </View>
   );
 }

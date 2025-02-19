@@ -20,7 +20,7 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchIncubadoras = async () => {
       try {
-        const response = await axios.get('http://192.168.1.98:3000/api/incubadoras');
+        const response = await axios.get('http://192.168.161.78:3000/api/incubadoras');
         setIncubadoras(response.data);
       } catch (error) {
         console.error('Error al obtener las incubadoras:', error);
@@ -32,7 +32,7 @@ export default function HomeScreen() {
 
   const agregarIncubadora = async () => {
     try {
-      const response = await axios.post('http://192.168.1.98:3000/api/incubadoras', {
+      const response = await axios.post('http://192.168.161.78:3000/api/incubadoras', {
         name: `Incubadora ${incubadoras.length + 1}`,
       });
       setIncubadoras([...incubadoras, response.data]);
@@ -51,7 +51,7 @@ export default function HomeScreen() {
     if (!selectedIncubadora) return;
 
     try {
-      const response = await axios.put(`http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora._id}`, {
+      const response = await axios.put(`http://192.168.161.78:3000/api/incubadoras/${selectedIncubadora._id}`, {
         name: newName,
       });
       setIncubadoras(incubadoras.map(item => 
@@ -67,7 +67,7 @@ export default function HomeScreen() {
     if (!selectedIncubadora) return;
 
     try {
-      await axios.delete(`http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora._id}`);
+      await axios.delete(`http://192.168.161.78:3000/api/incubadoras/${selectedIncubadora._id}`);
       setIncubadoras(incubadoras.filter(item => item._id !== selectedIncubadora._id));
       setModalVisible(false);
     } catch (error) {

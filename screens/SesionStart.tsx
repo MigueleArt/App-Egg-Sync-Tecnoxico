@@ -14,7 +14,7 @@ export default function SesionStart() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.1.98:3000/api/auth/login', { email, password });
+      const response = await axios.post('http://192.168.161.78:3000/api/auth/login', { email, password });
       if (response.data.message === 'Inicio de sesión exitoso') {
         // Guardar el token de autenticación (si estás usando JWT)
         // Por ejemplo: AsyncStorage.setItem('token', response.data.token);
