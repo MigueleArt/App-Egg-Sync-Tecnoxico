@@ -6,7 +6,7 @@ import axios from 'axios';
 import styles from '../styles';
 
 type Incubadora = {
-  _id: string;
+  id: string;
   name: string;
 };
 
@@ -20,8 +20,12 @@ export default function HomeScreen() {
   useEffect(() => {
     const fetchIncubadoras = async () => {
       try {
-        const response = await axios.get('http://192.168.161.78:3000/api/incubadoras');
-        setIncubadoras(response.data);
+        const response = await axios.get('http://192.168.1.98:3000/api/incubadoras');
+        if (Array.isArray(response.data)) {
+          setIncubadoras(response.data);
+        } else {
+          console.error('La API no devolvió un array:', response.data);
+        }
       } catch (error) {
         console.error('Error al obtener las incubadoras:', error);
       }
@@ -32,10 +36,15 @@ export default function HomeScreen() {
 
   const agregarIncubadora = async () => {
     try {
-      const response = await axios.post('http://192.168.161.78:3000/api/incubadoras', {
+      const response = await axios.post('http://192.168.1.98:3000/api/incubadoras', {
         name: `Incubadora ${incubadoras.length + 1}`,
       });
-      setIncubadoras([...incubadoras, response.data]);
+
+      if (response.data && response.data.id) {
+        setIncubadoras([...incubadoras, response.data]);
+      } else {
+        console.error('Error: La API no devolvió datos válidos', response.data);
+      }
     } catch (error) {
       console.error('Error al agregar la incubadora:', error);
     }
@@ -51,13 +60,19 @@ export default function HomeScreen() {
     if (!selectedIncubadora) return;
 
     try {
-      const response = await axios.put(`http://192.168.161.78:3000/api/incubadoras/${selectedIncubadora._id}`, {
-        name: newName,
-      });
-      setIncubadoras(incubadoras.map(item => 
-        item._id === selectedIncubadora._id ? response.data : item
-      ));
-      setModalVisible(false);
+      const response = await axios.put(
+        `http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora.id}`,
+        { name: newName }
+      );
+
+      if (response.data && response.data.id) {
+        setIncubadoras(incubadoras.map(item => 
+          item.id === selectedIncubadora.id ? response.data : item
+        ));
+        setModalVisible(false);
+      } else {
+        console.error('Error: La API no devolvió datos válidos', response.data);
+      }
     } catch (error) {
       console.error('Error al actualizar la incubadora:', error);
     }
@@ -67,8 +82,9 @@ export default function HomeScreen() {
     if (!selectedIncubadora) return;
 
     try {
-      await axios.delete(`http://192.168.161.78:3000/api/incubadoras/${selectedIncubadora._id}`);
-      setIncubadoras(incubadoras.filter(item => item._id !== selectedIncubadora._id));
+      await axios.delete(`http://192.168.1.98:3000/api/incubadoras/${selectedIncubadora.id}`);
+
+      setIncubadoras(incubadoras.filter(item => item.id !== selectedIncubadora.id));
       setModalVisible(false);
     } catch (error) {
       console.error('Error al eliminar la incubadora:', error);
@@ -83,9 +99,9 @@ export default function HomeScreen() {
 
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.scrollContent}>
         <View style={styles.cardList}>
-          {incubadoras.map((item) => (
-            <View key={item._id} style={styles.card}>
-              <TouchableOpacity style={styles.cardTouchable} onPress={() => navigation.navigate('Incubator', { id: item._id })}>
+          {incubadoras.map((item, index) => (
+            <View key={`${item.id}-${index}`} style={styles.card}>
+              <TouchableOpacity style={styles.cardTouchable} onPress={() => navigation.navigate('Incubator', { id: item.id })}>
                 <Image source={require('../images/pollo-chico.jpg')} style={styles.icon} />
                 <Text style={styles.cardText}>{item.name}</Text>
               </TouchableOpacity>

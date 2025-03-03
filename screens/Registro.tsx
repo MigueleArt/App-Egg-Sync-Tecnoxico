@@ -29,7 +29,7 @@ export default function Registro() {
   
     try {
       // Enviar los datos al backend
-      const response = await axios.post('http://192.168.161.78:3000/api/auth/register', {
+      const response = await axios.post('http://192.168.1.98:3000/auth/register', {
         nombre,
         email,
         password,

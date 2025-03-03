@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NavigationProps = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -14,18 +15,24 @@ export default function SesionStart() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.161.78:3000/api/auth/login', { email, password });
-      if (response.data.message === 'Inicio de sesión exitoso') {
-        // Guardar el token de autenticación (si estás usando JWT)
-        // Por ejemplo: AsyncStorage.setItem('token', response.data.token);
+      const response = await axios.post('http://192.168.1.98:3000/auth/login', { email, password });
 
-        // Redirigir a la pantalla principal
+      //console.log(response.data); // Depuración
+
+      if (response.data.token) {
+        await AsyncStorage.setItem('token', response.data.token);
         navigation.navigate('Home');
       } else {
-        Alert.alert('Error', 'Credenciales incorrectas');
+        Alert.alert('Error', 'No se recibió un token válido');
       }
-    } catch (error) {
-      Alert.alert('Error', 'Hubo un problema al iniciar sesión');
+    } catch (error: unknown) {
+      console.error(error);
+
+      if (axios.isAxiosError(error) && error.response) {
+        Alert.alert('Error', error.response.data.message || 'Credenciales incorrectas');
+      } else {
+        Alert.alert('Error', 'No se pudo conectar con el servidor');
+      }
     }
   };
 
@@ -40,6 +47,8 @@ export default function SesionStart() {
         style={styles.input}
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
       <TextInput
         placeholder="Introduce tu contraseña"
@@ -131,3 +140,4 @@ const styles = StyleSheet.create({
     marginTop: 240,
   },
 });
+
